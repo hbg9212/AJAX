@@ -7,6 +7,9 @@
 		//전역변수 선언 시작
 		let currentPage = 1;
 		let lastPage = 0;
+		let currentTenPage = 0;
+		let lastTenPage = 0;
+		let repetitionPage = 0;
 		//전역변수 선언 종료
 		
 		//삭제 이벤트 시작
@@ -100,8 +103,17 @@
 				,data:{'currentPage':currentPage}
 				,success:function(data){
 					$('#list').empty();
- 					$('#btnNext').empty();
- 					$('#btnPrevious').empty();
+ 					$('#btnNext').hide();
+ 					$('#btnPage2').hide();
+ 					$('#btnPage3').hide();
+ 					$('#btnPage4').hide();
+ 					$('#btnPage5').hide();
+ 					$('#btnPage6').hide();
+ 					$('#btnPage7').hide();
+ 					$('#btnPage8').hide();
+ 					$('#btnPage9').hide();
+ 					$('#btnPage10').hide();
+ 					$('#btnPrevious').hide();
 					$(data.list).each(function(index,item){
 						$('#list').append('<tr>');
 						$('#list').append('<td><input type="checkbox" class="ck" value="'+item.id+'"></td>');
@@ -113,16 +125,66 @@
 						$('#list').append('</tr>');
 					});
 					currentPage = parseInt(data.currentPage);
+					currentTenPage = parseInt(data.currentTenPage);
 					lastPage = parseInt(data.lastPage);
+					lastTenPage = parseInt(data.lastTenPage);
+					repetitionPage = parseInt(data.repetitionPage);
 					console.log('현재페이지' + currentPage);
+					console.log('반복횟수' + repetitionPage);
 					console.log('마지막페이지' + lastPage);
- 					if(currentPage > 1){
-						$('#btnPrevious').append('<button type="button">previous</button>');	
+					let showPageNumber = currentTenPage*10+1;
+					$('#btnPage1').text(showPageNumber);
+ 					if(currentPage > 10){
+						$('#btnPrevious').show();
 					}
 					if(currentPage < lastPage){
-						$('#btnNext').append('<button type="button">next</button>');	
-					} 
-					
+						$('#btnNext').show();	
+					}
+					if(repetitionPage > 1){
+						showPageNumber = currentTenPage*10+2;
+						$('#btnPage2').show();
+						$('#btnPage2').text(showPageNumber);
+					}
+					if(repetitionPage > 2){
+						showPageNumber = currentTenPage*10+3;
+						$('#btnPage3').show();
+						$('#btnPage3').text(showPageNumber);
+					}
+					if(repetitionPage > 3){
+						showPageNumber = currentTenPage*10+4;
+						$('#btnPage3').show();
+						$('#btnPage3').text(showPageNumber);
+					}
+					if(repetitionPage > 4){
+						showPageNumber = currentTenPage*10+5;
+						$('#btnPage5').show();
+						$('#btnPage5').text(showPageNumber);
+					}
+					if(repetitionPage > 5){
+						showPageNumber = currentTenPage*10+6;
+						$('#btnPage6').show();
+						$('#btnPage6').text(showPageNumber);
+					}
+					if(repetitionPage > 6){
+						showPageNumber = currentTenPage*10+7;
+						$('#btnPage7').show();
+						$('#btnPage7').text(showPageNumber);
+					}
+					if(repetitionPage > 7){
+						showPageNumber = currentTenPage*10+8;
+						$('#btnPage8').show();
+						$('#btnPage8').text(showPageNumber);
+					}
+					if(repetitionPage > 8){
+						showPageNumber = currentTenPage*10+9;
+						$('#btnPage9').show();
+						$('#btnPage9').text(showPageNumber);
+					}
+					if(repetitionPage > 9){
+						showPageNumber = (currentTenPage+1)*10;
+						$('#btnPage10').show();
+						$('#btnPage10').text(showPageNumber);
+					}				
 				}
 			});
 		});
@@ -134,15 +196,68 @@
  		//이전페이지 이벤트 시작
  		$('#btnPrevious').on('click',function() {
  			console.log('#btnPrevious');
- 			currentPage--
+ 			currentPage = currentTenPage*10;
  			$('#btnList').trigger('click');
  		});
  		//이전페이지 이벤트 종료
  		
+ 		//페이지넘버 버튼 이벤트 시작
+ 		$('#btnPage1').on('click',function() {
+ 			console.log('#btnPage1');
+ 			currentPage = currentTenPage*10+1;
+ 			$('#btnList').trigger('click');
+ 		});
+ 		$('#btnPage2').on('click',function() {
+ 			console.log('#btnPage2');
+ 			currentPage = currentTenPage*10+2;
+ 			$('#btnList').trigger('click');
+ 		});
+ 		$('#btnPage3').on('click',function() {
+ 			console.log('#btnPage3');
+ 			currentPage = currentTenPage*10+3;
+ 			$('#btnList').trigger('click');
+ 		});
+ 		$('#btnPage4').on('click',function() {
+ 			console.log('#btnPage1');
+ 			currentPage = currentTenPage*10+4;
+ 			$('#btnList').trigger('click');
+ 		});
+ 		$('#btnPage5').on('click',function() {
+ 			console.log('#btnPage1');
+ 			currentPage = currentTenPage*10+5;
+ 			$('#btnList').trigger('click');
+ 		});
+ 		$('#btnPage6').on('click',function() {
+ 			console.log('#btnPage1');
+ 			currentPage = currentTenPage*10+6;
+ 			$('#btnList').trigger('click');
+ 		});
+ 		$('#btnPage7').on('click',function() {
+ 			console.log('#btnPage1');
+ 			currentPage = currentTenPage*10+7;
+ 			$('#btnList').trigger('click');
+ 		});
+ 		$('#btnPage8').on('click',function() {
+ 			console.log('#btnPage1');
+ 			currentPage = currentTenPage*10+8;
+ 			$('#btnList').trigger('click');
+ 		});
+ 		$('#btnPage9').on('click',function() {
+ 			console.log('#btnPage1');
+ 			currentPage = currentTenPage*10+9;
+ 			$('#btnList').trigger('click');
+ 		});
+ 		$('#btnPage10').on('click',function() {
+ 			console.log('#btnPage1');
+ 			currentPage = (currentTenPage+1)*10;
+ 			$('#btnList').trigger('click');
+ 		});
+ 		//페이지넘버 버튼 이벤트 종료
+ 		
  		//다음페이지 이벤트 시작
  		$('#btnNext').on('click',function() {
  			console.log('#btnNext');
- 			currentPage++
+ 			currentPage = (currentTenPage+1)*10+1;
  			$('#btnList').trigger('click');
  		});
  		//다음페이지 이벤트 시작
@@ -196,8 +311,18 @@
 		</tbody>
 	</table>
 	<div id="paging">
-		<span id="btnPrevious"></span>
-		<span id="btnNext"></span>
+		<button type="button" id="btnPrevious">previous</button>
+		<button type="button" id="btnPage1"></button>
+		<button type="button" id="btnPage2"></button>
+		<button type="button" id="btnPage3"></button>
+		<button type="button" id="btnPage4"></button>
+		<button type="button" id="btnPage5"></button>
+		<button type="button" id="btnPage6"></button>
+		<button type="button" id="btnPage7"></button>
+		<button type="button" id="btnPage8"></button>
+		<button type="button" id="btnPage9"></button>
+		<button type="button" id="btnPage10"></button>
+		<button type="button" id="btnNext">next</button>
 	</div>
 </body>
 </html>

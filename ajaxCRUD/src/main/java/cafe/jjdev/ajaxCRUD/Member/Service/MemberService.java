@@ -36,10 +36,22 @@ public class MemberService {
 		//회원리스트 select와 회원리스트 페이징을 위한 select*count(*) Mapper요청 종료
 		
 		//페이징을 위한 변수 셋팅 시작
+		int currentTenPage = currentPage/10;
+		if(currentPage%10 == 0) {
+			currentTenPage--;
+		}
 		int lastPage = MEMBER_COUNT/ROW_PER_PAGE;
 		if(MEMBER_COUNT%ROW_PER_PAGE !=0) {
 			lastPage++;
 		}
+		int lastTenPage = lastPage/10;
+		if(lastTenPage%10 == 0) {
+			lastTenPage--;
+		}
+		int repetitionPage = 10;
+		if((lastPage - currentTenPage*10) < 10) {
+			repetitionPage = lastPage % 10 ;
+		}	
 		//페이징을 위한 변수 셋팅 시작
 		
 		//리턴을 위한 map 셋팅 시작
@@ -47,7 +59,13 @@ public class MemberService {
 		returnMap.put("list", list);
 		returnMap.put("lastPage", lastPage);
 		returnMap.put("currentPage", currentPage);
+		returnMap.put("currentTenPage", currentTenPage);
+		returnMap.put("lastTenPage", lastTenPage);
+		returnMap.put("repetitionPage", repetitionPage);
 		System.out.println("[MemberService] lastPage : " + lastPage);
+		System.out.println("[MemberService] currentTenPage : " + currentTenPage);
+		System.out.println("[MemberService] lastTenPage : " + lastTenPage);
+		System.out.println("[MemberService] repetitionPage : " + repetitionPage);
 		//리턴을 위한 map 셋팅 종료
 		return returnMap;
 	}
