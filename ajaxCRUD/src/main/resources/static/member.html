@@ -1,0 +1,201 @@
+<!DOCTYPE>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+	$(document).ready(function() {
+		//전역변수 선언 시작
+		let currentPage = 1;
+		let lastPage = 0;
+		//전역변수 선언 종료
+		
+		//삭제 이벤트 시작
+		$('#btnRemove').on('click',function() {
+			let ck = new Array(); // let ck =[]
+			$('.ck:checked').each(function(index,item){
+				ck.push($(item).val());
+			});
+			console.log('#btnRemove click');
+			$.ajax({
+				url:'/removeMember'
+				,type:'post'
+				,data:{'ck':ck}
+				,success:function(data){
+					$('#btnList').trigger('click');
+				}
+			});
+		});
+		//삭제 이벤트 종료
+		
+		//추가 이벤트 시작
+		$('#btnAdd').on('click',function() {
+			console.log('#btnAdd click');
+			let id = $('#id').val();
+			let pw = $('#pw').val();
+			let name = $('#name').val();
+			let age = $('#age').val();
+			let gender = $('#gender').val();
+			if(id == "") {
+				console.log('id 미 입력');
+			} else if(pw == "") {
+				console.log('pw 미 입력');
+			} else if(name == "") {
+				console.log('name 미 입력');
+			} else if(age == "") {
+				console.log('age 미 입력');
+			} else if(gender == "") {
+				console.log('gender 미 입력');
+			} else {
+		 		$.ajax({
+					url:'/addMember'
+					,type:'post'
+					,data:{'id':id,'pw':pw,'name':name,'age':age,'gender':gender}
+					,success:function(data){
+						$('#btnList').trigger('click');
+					}
+		        });
+			}
+		});
+		//추가 이벤트 종료
+		
+		//수정 이벤트 시작
+		$('#btnModify').on('click',function() {
+			console.log('#btnModify click');
+			let id = $('#id').val();
+			let pw = $('#pw').val();
+			let name = $('#name').val();
+			let age = $('#age').val();
+			let gender = $('#gender').val();
+			if(id == "") {
+				console.log('id 미 입력');
+			} else if(pw == "") {
+				console.log('pw 미 입력');
+			} else if(name == "") {
+				console.log('name 미 입력');
+			} else if(age == "") {
+				console.log('age 미 입력');
+			} else if(gender == "") {
+				console.log('gender 미 입력');
+			} else {
+				$.ajax({
+					url:'/modifyMember'
+					,type:'post'
+					,data:{'id':id,'pw':pw,'name':name,'age':age,'gender':gender}
+					,success:function(data){
+						$('#btnList').trigger('click');
+					}
+				});
+			}
+		});
+		//수정 이벤트 종료
+		
+		//목록 이벤트 시작
+		$('#btnList').on('click',function() {
+			console.log('#btnList click');
+			$.ajax({
+				url:'/getMembers'
+				,type:'get'
+				,data:{'currentPage':currentPage}
+				,success:function(data){
+					$('#list').empty();
+ 					$('#btnNext').empty();
+ 					$('#btnPrevious').empty();
+					$(data.list).each(function(index,item){
+						$('#list').append('<tr>');
+						$('#list').append('<td><input type="checkbox" class="ck" value="'+item.id+'"></td>');
+						$('#list').append('<td>'+item.id+'</td>');
+						$('#list').append('<td>'+item.pw+'</td>');
+						$('#list').append('<td>'+item.name+'</td>');
+						$('#list').append('<td>'+item.age+'</td>');
+						$('#list').append('<td>'+item.gender+'</td>');
+						$('#list').append('</tr>');
+					});
+					currentPage = parseInt(data.currentPage);
+					lastPage = parseInt(data.lastPage);
+					console.log('현재페이지' + currentPage);
+					console.log('마지막페이지' + lastPage);
+ 					if(currentPage > 1){
+						$('#btnPrevious').append('<button type="button">previous</button>');	
+					}
+					if(currentPage < lastPage){
+						$('#btnNext').append('<button type="button">next</button>');	
+					} 
+					
+				}
+			});
+		});
+		//목록 이벤트 종료
+		
+		//페이지 시작시 목록 이벤트 시작 하기
+ 		$('#btnList').trigger('click');
+ 		
+ 		//이전페이지 이벤트 시작
+ 		$('#btnPrevious').on('click',function() {
+ 			console.log('#btnPrevious');
+ 			currentPage--
+ 			$('#btnList').trigger('click');
+ 		});
+ 		//이전페이지 이벤트 종료
+ 		
+ 		//다음페이지 이벤트 시작
+ 		$('#btnNext').on('click',function() {
+ 			console.log('#btnNext');
+ 			currentPage++
+ 			$('#btnList').trigger('click');
+ 		});
+ 		//다음페이지 이벤트 시작
+	});
+</script>
+</head>
+<body>
+	<table border="1">
+		<thead>
+			<tr>
+				<th>id</th>
+				<th>pw</th>
+				<th>name</th>
+				<th>age</th>
+				<th>gender</th>
+				<th>추가</th>
+				<th>수정</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><input type="text" id="id"></td>
+				<td><input type="password" id="pw"></td>
+				<td><input type="text" id="name"></td>
+				<td><input type="text" id="age"></td>
+				<td>
+					<select id="gender">
+						<option value="Male">남</option>
+						<option value="Female">여</option>
+					</select>
+				</td>
+				<td><button type="button" id="btnAdd">add</button></td>
+				<td><button type="button" id="btnModify">modify</button></td>
+			</tr>
+		</tbody>
+	</table>
+	<button type="button" id="btnList">회원리스트</button>
+	<button type="button" id="btnRemove">remove</button>
+	<table border="1">
+		<thead>
+			<tr>
+				<th></th>
+				<th>id</th>
+				<th>pw</th>
+				<th>name</th>
+				<th>age</th>
+				<th>gender</th>
+			</tr>
+		</thead>
+		<tbody id="list">
+		</tbody>
+	</table>
+	<div id="paging">
+		<span id="btnPrevious"></span>
+		<span id="btnNext"></span>
+	</div>
+</body>
+</html>
