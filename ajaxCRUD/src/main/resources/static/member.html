@@ -1,16 +1,21 @@
 <!DOCTYPE>
 <html>
 <head>
+<style>
+.red {
+  color: red;
+}
+</style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
 	$(document).ready(function() {
-		//전역변수 선언 시작
+		//지역변수 선언 시작
 		let currentPage = 1;
 		let lastPage = 0;
 		let currentTenPage = 0;
 		let lastTenPage = 0;
 		let repetitionPage = 0;
-		//전역변수 선언 종료
+		//지역변수 선언 종료
 		
 		//삭제 이벤트 시작
 		$('#btnRemove').on('click',function() {
@@ -39,16 +44,21 @@
 			let age = $('#age').val();
 			let gender = $('#gender').val();
 			//유효성 검사
-			if(id == "") {
-				console.log('id 미 입력');
+			if(id 	== "") {
+				$('h3').addClass('red');
+				$('h3').text('id 미 입력');
 			} else if(pw == "") {
-				console.log('pw 미 입력');
+				$('h3').addClass('red');
+				$('h3').text('pw 미 입력');
 			} else if(name == "") {
-				console.log('name 미 입력');
+				$('h3').addClass('red');
+				$('h3').text('name 미 입력');
 			} else if(age == "") {
-				console.log('age 미 입력');
+				$('h3').addClass('red');
+				$('h3').text('age 미 입력');
 			} else if(gender == "") {
-				console.log('gender 미 입력');
+				$('h3').addClass('red');
+				$('h3').text('gender 미 입력');
 			} else {
 		 		$.ajax({
 					url:'/addMember'
@@ -71,16 +81,21 @@
 			let age = $('#age').val();
 			let gender = $('#gender').val();
 			//유효성 검사
-			if(id == "") {
-				console.log('id 미 입력');
+			if(id 	== "") {
+				$('h3').addClass('red');
+				$('h3').text('id 미 입력');
 			} else if(pw == "") {
-				console.log('pw 미 입력');
+				$('h3').addClass('red');
+				$('h3').text('pw 미 입력');
 			} else if(name == "") {
-				console.log('name 미 입력');
+				$('h3').addClass('red');
+				$('h3').text('name 미 입력');
 			} else if(age == "") {
-				console.log('age 미 입력');
+				$('h3').addClass('red');
+				$('h3').text('age 미 입력');
 			} else if(gender == "") {
-				console.log('gender 미 입력');
+				$('h3').addClass('red');
+				$('h3').text('gender 미 입력');
 			} else {
 				$.ajax({
 					url:'/modifyMember'
@@ -260,11 +275,83 @@
  			currentPage = (currentTenPage+1)*10+1;
  			$('#btnList').trigger('click');
  		});
- 		//다음페이지 이벤트 시작
+ 		//다음페이지 이벤트 종료
 	});
+	
+	//나이 입력 유효성 검사 시작
+	function checkAge(event){
+		event = event || window.event;
+		let keyID = (event.which) ? event.which : event.keyCode;
+		if( ( keyID >=48 && keyID <= 57 ) || ( keyID >=96 && keyID <= 105 ) || keyID == 8 ||  keyID == 46 || keyID == 37 || keyID == 39) {
+			$('h3').empty();
+			return;
+		} else {
+			$('h3').addClass('red');
+			$('h3').text('나이입력란에는 숫자만 입력하세요.');
+			return false;
+		}
+	};
+	//한글입력에 의한 버그 수정 시작
+	function removeChar(event) {
+		event = event || window.event;
+		let keyID = (event.which) ? event.which : event.keyCode;
+		if( keyID == 8 || keyID == 46 || keyID == 37 || keyID == 39 ) {
+			return;
+		} else {
+			event.target.value = event.target.value.replace(/[^0-9]/g, "");
+		}
+	};
+	//한글입력에 의한 버그 수정 종료
+	//나이입력 유효성 검사 종료
+	
+	//id입력 유효성 검사 시작
+	function checkId(event){
+		event = event || window.event;
+		let keyID = (event.which) ? event.which : event.keyCode;
+		if( keyID == 32 ) {
+			$('h3').addClass('red');
+			$('h3').text('id입력란에는 공백을 입력할수 없습니다.');
+			return false;
+		} else {
+			$('h3').empty();
+			return;
+		}
+	};
+	//id입력 유효성 검사 종료
+
+	//pw입력 유효성 검사 시작
+	function checkPw(event){
+		event = event || window.event;
+		let keyID = (event.which) ? event.which : event.keyCode;
+		if( keyID == 32 ) {
+			$('h3').addClass('red');
+			$('h3').text('pw입력란에는 공백을 입력할수 없습니다.');
+			return false;
+		} else {
+			$('h3').empty();
+			return;
+		}
+	};
+	//pw입력 유효성 검사 종료
+	
+	//name입력 유효성 검사 시작
+	function checkName(event){
+		event = event || window.event;
+		let keyID = (event.which) ? event.which : event.keyCode;
+		if( keyID == 32 ) {
+			$('h3').addClass('red');
+			$('h3').text('name입력란에는 공백을 입력할수 없습니다.');
+			return false;
+		} else {
+			$('h3').empty();
+			return;
+		}
+	};
+	//name입력 유효성 검사 종료
 </script>
 </head>
 <body>
+	<h3></h3>
 	<table border="1">
 		<thead>
 			<tr>
@@ -279,10 +366,10 @@
 		</thead>
 		<tbody>
 			<tr>
-				<td><input type="text" id="id"></td>
-				<td><input type="password" id="pw"></td>
-				<td><input type="text" id="name"></td>
-				<td><input type="text" id="age"></td>
+				<td><input type="text" onkeydown="return checkId()" id="id"></td>
+				<td><input type="password" onkeydown="return checkPw()" id="pw"></td>
+				<td><input type="text" onkeydown="return checkName()" id="name"></td>
+				<td><input type="text"  onkeyup="removeChar(event)" onkeydown="return checkAge()" id="age"></td>
 				<td>
 					<select id="gender">
 						<option value="Male">남</option>
