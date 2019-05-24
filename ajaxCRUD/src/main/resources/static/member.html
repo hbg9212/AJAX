@@ -12,7 +12,7 @@
 		//id 입력 유효성 검사 시작
  		$('#id').on('keyup', function(event) {
 			console.log('id입력')
-			console.log($(this).val());
+			console.log($('#id').val());
 			event.target.value = event.target.value.replace( /[^A-Za-z0-9_]/, "");
  		});
  		//id 입력 유효성 검사 종료
@@ -20,7 +20,7 @@
  		//pw 입력 유효성 검사 시작
  		$('#pw').on('keyup', function(event) {
 			console.log('pw입력')
-			console.log($(this).val());
+			console.log($('#pw').val());
 			event.target.value = event.target.value.replace( /[^A-Za-z0-9_]/, "");
  		});
  		//pw 입력 유효성 검사 종료
@@ -28,7 +28,7 @@
  		//name 입력 유효성 검사 시작
  		$('#name').on('keyup', function(event) {
 			console.log('name입력')
-			console.log($(this).val());
+			console.log($('#name').val());
 			event.target.value = event.target.value.replace( /[^A-Za-z0-9_]/, "");
  		});
  		//name 입력 유효성 검사 종료
@@ -36,7 +36,7 @@
  		//age입력 유효성 검사 종료
  		$('#age').on('keyup', function(event) {
 			console.log('age입력')
-			console.log($(this).val());
+			console.log($('#age').val());
 			event.target.value = event.target.value.replace( /[^0-9_]/, "");
  		});
  		//age입력 유효성 검사 종료
