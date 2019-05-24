@@ -9,6 +9,38 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
 	$(document).ready(function() {
+		//id 입력 유효성 검사 시작
+ 		$('#id').on('keyup', function(event) {
+			console.log('id입력')
+			console.log($(this).val());
+			event.target.value = event.target.value.replace( /[^A-Za-z0-9_]/, "");
+ 		});
+ 		//id 입력 유효성 검사 종료
+ 		
+ 		//pw 입력 유효성 검사 시작
+ 		$('#pw').on('keyup', function(event) {
+			console.log('pw입력')
+			console.log($(this).val());
+			event.target.value = event.target.value.replace( /[^A-Za-z0-9_]/, "");
+ 		});
+ 		//pw 입력 유효성 검사 종료
+ 		
+ 		//name 입력 유효성 검사 시작
+ 		$('#name').on('keyup', function(event) {
+			console.log('name입력')
+			console.log($(this).val());
+			event.target.value = event.target.value.replace( /[^A-Za-z0-9_]/, "");
+ 		});
+ 		//name 입력 유효성 검사 종료
+ 		
+ 		//age입력 유효성 검사 종료
+ 		$('#age').on('keyup', function(event) {
+			console.log('age입력')
+			console.log($(this).val());
+			event.target.value = event.target.value.replace( /[^A-Za-z0-9_]/, "");
+ 		});
+ 		//age입력 유효성 검사 종료
+		
 		//지역변수 선언 시작
 		let currentPage = 1;
 		let lastPage = 0;
@@ -194,60 +226,7 @@
  		});
  		//다음페이지 이벤트 종료
  		
- 		//id 입력 유효성 검사 시작
- 		$('#id').on('keydown', function(event) {
-			console.log('id입력')
-			console.log($(this).val());
-			event.target.value = event.target.value.replace(/[^0-9]/g, "");
- 		});
- 		//id 입력 유효성 검사 종료
  		
- 		//pw 입력 유효성 검사 시작
- 		$('#pw').on('keydown', function(event) {
-			console.log('pw입력')
-			event = event || window.event;
- 			let keyID = (event.which) ? event.which : event.keyCode;
- 			if( keyID == 32 ) {
- 				$('h3').addClass('red');
- 				$('h3').text('pw입력란에는 공백을 입력할수 없습니다.');
- 				return false;
- 			} else {
- 				$('h3').empty();
- 				return;
- 			}
-			
- 		});
- 		//pw 입력 유효성 검사 종료
- 		
- 		//name 입력 유효성 검사 시작
- 		$('#name').on('keydown', function(event) {
-			console.log('name입력')
-			event = event || window.event;
- 			let keyID = (event.which) ? event.which : event.keyCode;
- 			if( keyID == 32 ) {
- 				$('h3').addClass('red');
- 				$('h3').text('name입력란에는 공백을 입력할수 없습니다.');
- 				return false;
- 			} else {
- 				$('h3').empty();
- 				return;
- 			}
-			
- 		});
- 		//name 입력 유효성 검사 종료
- 		
- 		//age입력 유효성 검사 종료
- 		$('#age').on('keyup', function(event) {
- 			console.log('age입력')
- 			event = event || window.event;
- 			let keyID = (event.which) ? event.which : event.keyCode;
- 			if( keyID == 8 || keyID == 46 || keyID == 37 || keyID == 39 ) {
- 				return;
- 			} else {
- 				event.target.value = event.target.value.replace(/[^0-9]/g, "");
- 			}
- 		});
- 		//age입력 유효성 검사 종료
 	});
 </script>
 </head>
