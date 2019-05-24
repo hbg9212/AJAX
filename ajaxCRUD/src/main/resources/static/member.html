@@ -181,57 +181,12 @@
  		//이전페이지 이벤트 종료
  		
  		//페이지넘버 버튼 이벤트 시작
- 		$('#btnPage1').on('click',function() {
- 			console.log('#btnPage1');
- 			currentPage = currentTenPage*10+1;
- 			$('#btnList').trigger('click');
+ 		$('.btnPage').click(function(){
+ 			console.log(this.innerHTML);
+			currentPage = parseInt(this.innerHTML);
+			$('#btnList').trigger('click');
  		});
- 		$('#btnPage2').on('click',function() {
- 			console.log('#btnPage2');
- 			currentPage = currentTenPage*10+2;
- 			$('#btnList').trigger('click');
- 		});
- 		$('#btnPage3').on('click',function() {
- 			console.log('#btnPage3');
- 			currentPage = currentTenPage*10+3;
- 			$('#btnList').trigger('click');
- 		});
- 		$('#btnPage4').on('click',function() {
- 			console.log('#btnPage1');
- 			currentPage = currentTenPage*10+4;
- 			$('#btnList').trigger('click');
- 		});
- 		$('#btnPage5').on('click',function() {
- 			console.log('#btnPage1');
- 			currentPage = currentTenPage*10+5;
- 			$('#btnList').trigger('click');
- 		});
- 		$('#btnPage6').on('click',function() {
- 			console.log('#btnPage1');
- 			currentPage = currentTenPage*10+6;
- 			$('#btnList').trigger('click');
- 		});
- 		$('#btnPage7').on('click',function() {
- 			console.log('#btnPage1');
- 			currentPage = currentTenPage*10+7;
- 			$('#btnList').trigger('click');
- 		});
- 		$('#btnPage8').on('click',function() {
- 			console.log('#btnPage1');
- 			currentPage = currentTenPage*10+8;
- 			$('#btnList').trigger('click');
- 		});
- 		$('#btnPage9').on('click',function() {
- 			console.log('#btnPage1');
- 			currentPage = currentTenPage*10+9;
- 			$('#btnList').trigger('click');
- 		});
- 		$('#btnPage10').on('click',function() {
- 			console.log('#btnPage1');
- 			currentPage = (currentTenPage+1)*10;
- 			$('#btnList').trigger('click');
- 		});
- 		//페이지넘버 버튼 이벤트 종료
+  		//페이지넘버 버튼 이벤트 종료
  		
  		//다음페이지 이벤트 시작
  		$('#btnNext').on('click',function() {
