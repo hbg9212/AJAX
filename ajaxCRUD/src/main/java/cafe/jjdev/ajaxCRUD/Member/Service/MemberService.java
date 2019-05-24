@@ -45,7 +45,7 @@ public class MemberService {
 			lastPage++;
 		}
 		int lastTenPage = lastPage/10;
-		if(lastTenPage%10 == 0) {
+		if(lastPage%10 == 0) {
 			lastTenPage--;
 		}
 		int repetitionPage = 10;

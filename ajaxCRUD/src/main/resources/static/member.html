@@ -152,53 +152,17 @@
  					if(currentPage > 10){
 						$('#btnPrevious').show();
 					}
-					if(currentPage < lastPage){
+					if(currentTenPage < lastTenPage){
 						$('#btnNext').show();	
 					}
-					if(repetitionPage > 1){
-						showPageNumber = currentTenPage*10+2;
-						$('#btnPage2').show();
-						$('#btnPage2').text(showPageNumber);
-					}
-					if(repetitionPage > 2){
-						showPageNumber = currentTenPage*10+3;
-						$('#btnPage3').show();
-						$('#btnPage3').text(showPageNumber);
-					}
-					if(repetitionPage > 3){
-						showPageNumber = currentTenPage*10+4;
-						$('#btnPage3').show();
-						$('#btnPage3').text(showPageNumber);
-					}
-					if(repetitionPage > 4){
-						showPageNumber = currentTenPage*10+5;
-						$('#btnPage5').show();
-						$('#btnPage5').text(showPageNumber);
-					}
-					if(repetitionPage > 5){
-						showPageNumber = currentTenPage*10+6;
-						$('#btnPage6').show();
-						$('#btnPage6').text(showPageNumber);
-					}
-					if(repetitionPage > 6){
-						showPageNumber = currentTenPage*10+7;
-						$('#btnPage7').show();
-						$('#btnPage7').text(showPageNumber);
-					}
-					if(repetitionPage > 7){
-						showPageNumber = currentTenPage*10+8;
-						$('#btnPage8').show();
-						$('#btnPage8').text(showPageNumber);
-					}
-					if(repetitionPage > 8){
-						showPageNumber = currentTenPage*10+9;
-						$('#btnPage9').show();
-						$('#btnPage9').text(showPageNumber);
-					}
-					if(repetitionPage > 9){
-						showPageNumber = (currentTenPage+1)*10;
-						$('#btnPage10').show();
-						$('#btnPage10').text(showPageNumber);
+					for(let i = 1; i<repetitionPage; i++){
+						if(repetitionPage > i){
+							let n = i+1;
+							let btnPage = '#btnPage'+n
+							showPageNumber = currentTenPage*10+n;
+							$(btnPage).show();
+							$(btnPage).text(showPageNumber);
+						}
 					}				
 				}
 			});
@@ -366,10 +330,10 @@
 		</thead>
 		<tbody>
 			<tr>
-				<td><input type="text" onkeydown="return checkId()" id="id"></td>
-				<td><input type="password" onkeydown="return checkPw()" id="pw"></td>
-				<td><input type="text" onkeydown="return checkName()" id="name"></td>
-				<td><input type="text"  onkeyup="removeChar(event)" onkeydown="return checkAge()" id="age"></td>
+				<td><input type="text" onkeydown="return checkId(event)" id="id"></td>
+				<td><input type="password" onkeydown="return checkPw(event)" id="pw"></td>
+				<td><input type="text" onkeydown="return checkName(event)" id="name"></td>
+				<td><input type="text"  onkeyup="removeChar(event)" onkeydown="return checkAge(event)" id="age"></td>
 				<td>
 					<select id="gender">
 						<option value="Male">남</option>
@@ -399,16 +363,16 @@
 	</table>
 	<div id="paging">
 		<button type="button" id="btnPrevious">previous</button>
-		<button type="button" id="btnPage1"></button>
-		<button type="button" id="btnPage2"></button>
-		<button type="button" id="btnPage3"></button>
-		<button type="button" id="btnPage4"></button>
-		<button type="button" id="btnPage5"></button>
-		<button type="button" id="btnPage6"></button>
-		<button type="button" id="btnPage7"></button>
-		<button type="button" id="btnPage8"></button>
-		<button type="button" id="btnPage9"></button>
-		<button type="button" id="btnPage10"></button>
+		<button type="button" id="btnPage1" class="btnPage"></button>
+		<button type="button" id="btnPage2" class="btnPage"></button>
+		<button type="button" id="btnPage3" class="btnPage"></button>
+		<button type="button" id="btnPage4" class="btnPage"></button>
+		<button type="button" id="btnPage5" class="btnPage"></button>
+		<button type="button" id="btnPage6" class="btnPage"></button>
+		<button type="button" id="btnPage7" class="btnPage"></button>
+		<button type="button" id="btnPage8" class="btnPage"></button>
+		<button type="button" id="btnPage9" class="btnPage"></button>
+		<button type="button" id="btnPage10" class="btnPage"></button>
 		<button type="button" id="btnNext">next</button>
 	</div>
 </body>
