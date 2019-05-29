@@ -9,35 +9,73 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
 	$(document).ready(function() {
+		//유효성 검사을 위한 변수 선언 시작
+		let idAndPwCheckVal = /^[a-zA-Z0-9]{4,12}$/;
+		let nameCheckVal = /^[가-힣]/;
+		let ageCheckVal = /^[0-9_]/;
+		let idCheck = true;
+		let pwCheck = true;
+		let nameCheck = true;
+		let ageCheck = true;
+		//유효성 검사을 위한 변수 선언 종료
+		
 		//id 입력 유효성 검사 시작
- 		$('#id').on('keyup', function(event) {
-			console.log('id입력')
-			console.log($('#id').val());
-			event.target.value = event.target.value.replace( /[^A-Za-z0-9_]/, "");
+ 		$('#id').blur(function() {
+			if(!idAndPwCheckVal.test($('#id').val())) {
+				console.log('id유효성 이상')
+				$('h3').addClass('red');
+				$('h3').text('id에는 영문과 숫자로 4자에서 12자까지 입력 가능합니다.');
+				idCheck = true;
+			} else {
+				$('h3').empty();
+				idCheck = false;
+			}
+			
  		});
  		//id 입력 유효성 검사 종료
  		
  		//pw 입력 유효성 검사 시작
- 		$('#pw').on('keyup', function(event) {
-			console.log('pw입력')
-			console.log($('#pw').val());
-			event.target.value = event.target.value.replace( /[^A-Za-z0-9_]/, "");
+ 		$('#pw').blur(function() {
+			if(!idAndPwCheckVal.test($('#pw').val())) {
+				console.log('pw유효성 이상')
+				$('h3').addClass('red');
+				$('h3').text('pw에는 영문과 숫자로 4자에서 12자까지 입력 가능합니다.');
+				pwCheck =  true;
+			} else {
+				$('h3').empty();
+				pwCheck = false;
+			}
+			
  		});
  		//pw 입력 유효성 검사 종료
  		
  		//name 입력 유효성 검사 시작
- 		$('#name').on('keyup', function(event) {
-			console.log('name입력')
-			console.log($('#name').val());
-			event.target.value = event.target.value.replace( /[^A-Za-z0-9_]/, "");
+ 		$('#name').blur(function() {
+			if(!nameCheckVal.test($('#name').val())) {
+				console.log('name유효성 이상')
+				$('h3').addClass('red');
+				$('h3').text('name에는 한글로 입력 가능합니다.');
+				nameCheck =  true;
+			} else {
+				$('h3').empty();
+				nameCheck = false;
+			}
+			
  		});
  		//name 입력 유효성 검사 종료
  		
  		//age입력 유효성 검사 종료
- 		$('#age').on('keyup', function(event) {
-			console.log('age입력')
-			console.log($('#age').val());
-			event.target.value = event.target.value.replace( /[^0-9_]/, "");
+ 		$('#age').blur(function() {
+			if(!ageCheckVal.test($('#age').val())) {
+				console.log('age유효성 이상')
+				$('h3').addClass('red');
+				$('h3').text('age에는 숫자만 입력 가능합니다.');
+				ageCheck =  true
+			} else {
+				$('h3').empty();
+				ageCheck = false;
+			}
+			
  		});
  		//age입력 유효성 검사 종료
 		
@@ -75,22 +113,19 @@
 			let name = $('#name').val();
 			let age = $('#age').val();
 			let gender = $('#gender').val();
-			//유효성 검사
-			if(id 	== "") {
+			//유효성 검사 후 추가 이벤트 시작
+			if(id 	== "" || idCheck) {
 				$('h3').addClass('red');
-				$('h3').text('id 미 입력');
-			} else if(pw == "") {
+				$('h3').text('id 올바르게 입력해 주세요.');
+			} else if(pw == "" || pwCheck) {
 				$('h3').addClass('red');
-				$('h3').text('pw 미 입력');
-			} else if(name == "") {
+				$('h3').text('pw 올바르게 입력해 주세요.');
+			} else if(name == "" || nameCheck) {
 				$('h3').addClass('red');
-				$('h3').text('name 미 입력');
-			} else if(age == "") {
+				$('h3').text('name 올바르게 입력해 주세요.');
+			} else if(age == "" || ageCheck) {
 				$('h3').addClass('red');
-				$('h3').text('age 미 입력');
-			} else if(gender == "") {
-				$('h3').addClass('red');
-				$('h3').text('gender 미 입력');
+				$('h3').text('age 올바르게 입력해 주세요.');
 			} else {
 		 		$.ajax({
 					url:'/addMember'
@@ -112,22 +147,19 @@
 			let name = $('#name').val();
 			let age = $('#age').val();
 			let gender = $('#gender').val();
-			//유효성 검사
-			if(id 	== "") {
+			//유효성 검사 후 수정 이벤트 시작
+			if(id 	== "" || idCheck) {
 				$('h3').addClass('red');
-				$('h3').text('id 미 입력');
-			} else if(pw == "") {
+				$('h3').text('id 올바르게 입력해 주세요.');
+			} else if(pw == "" || pwCheck) {
 				$('h3').addClass('red');
-				$('h3').text('pw 미 입력');
-			} else if(name == "") {
+				$('h3').text('pw 올바르게 입력해 주세요.');
+			} else if(name == "" || nameCheck) {
 				$('h3').addClass('red');
-				$('h3').text('name 미 입력');
-			} else if(age == "") {
+				$('h3').text('name 올바르게 입력해 주세요.');
+			} else if(age == "" || ageCheck) {
 				$('h3').addClass('red');
-				$('h3').text('age 미 입력');
-			} else if(gender == "") {
-				$('h3').addClass('red');
-				$('h3').text('gender 미 입력');
+				$('h3').text('age 올바르게 입력해 주세요.');
 			} else {
 				$.ajax({
 					url:'/modifyMember'
